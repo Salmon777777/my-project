@@ -1,0 +1,102 @@
+/* Статическая HTML/CSS-верстка экрана BORODA, Figma 2:8 (390 × 844). */
+:root {
+  color-scheme: light;
+  --canvas: #f7f7f5;
+  --surface: #fff;
+  --ink: #1f1f1f;
+  --muted: #666;
+  --line: #d1d1cc;
+  --button: #2c2c2c;
+  --neutral: #e3e3e3;
+}
+
+* { box-sizing: border-box; }
+.document { min-width: 280px; min-height: 100%; background: #000; }
+.page { margin: 0; min-height: 100vh; display: flex; justify-content: center; color: var(--ink); font-family: "Inter", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+button { font: inherit; }
+button:enabled { cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--muted); outline-offset: 4px; }
+.booking { display: flex; flex-direction: column; width: min(100%, 390px); min-height: max(844px, 100svh); background: var(--canvas); }
+.booking__header { flex: none; }
+.status-bar { height: 36px; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; line-height: 17px; }
+.status-bar__time { display: block; }
+.status-bar__indicators { display: flex; align-items: center; gap: 6px; padding-right: 15px; }
+.status-bar__signal { font-size: 12px; letter-spacing: 0; }
+.status-bar__battery { display: block; width: 12px; height: 5px; border-radius: 1px; background: var(--ink); }
+.navigation { display: flex; align-items: center; justify-content: space-between; height: 52px; padding: 0 24px 0 16px; }
+.navigation__back { display: flex; justify-content: center; align-items: center; gap: 4px; min-width: 100px; min-height: 44px; padding: 8px; border: 0; border-radius: 8px; background: transparent; color: var(--ink); font-size: 16px; line-height: 24px; }
+.navigation__back:hover { background: var(--neutral); }
+.navigation__chevron { line-height: 1; }
+.navigation__label { width: 140px; font-size: 11px; line-height: 15px; text-transform: uppercase; font-weight: 500; color: var(--muted); }
+.progress { padding: 0 24px; }
+.progress__caption { margin: 0 0 4px; font-size: 11px; line-height: 15px; font-weight: 600; text-transform: uppercase; color: var(--muted); }
+.progress__steps { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.progress__step { flex: 1; height: 3px; border-radius: 2px; background: var(--line); }
+.progress__step--complete, .progress__step--current { background: var(--ink); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.booking__main { flex: 1; padding: 68px 24px 24px; }
+.time-choice { display: flex; flex-direction: column; gap: 16px; }
+.time-choice__title { margin: 0; font-size: 28px; font-weight: 700; line-height: 39px; letter-spacing: -0.5px; }
+.time-choice__description { margin: 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+.time-choice__date { margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; }
+.time-choice__date-value { font: inherit; }
+.time-choice__slots { display: flex; flex-direction: column; gap: 16px; }
+.time-slot { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; border: 1px solid #767676; border-radius: 8px; background: var(--neutral); color: var(--ink); font-size: 16px; line-height: 24px; transition: background-color 140ms ease, box-shadow 140ms ease; }
+.time-slot--selected { border-color: #767676; }
+.time-slot--selected:hover { background: #d2d2d2; box-shadow: 0 0 0 1px #767676; }
+.time-slot--busy { opacity: 0.4; cursor: not-allowed; }
+.time-choice__change-date { align-self: stretch; min-height: 48px; margin: 0; padding: 12px 16px; border: 0; border-radius: 8px; color: var(--ink); background: transparent; font-size: 16px; line-height: 24px; }
+.time-choice__change-date:hover { background: var(--neutral); }
+.booking__footer { flex: none; background: var(--surface); }
+.booking-summary { display: flex; flex-direction: column; gap: 10px; padding: 24px; }
+.booking-summary__time { margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; }
+.booking-summary__value { font: inherit; }
+.booking-summary__continue { min-height: 48px; padding: 12px 16px; border: 1px solid var(--button); border-radius: 8px; color: var(--surface); background: var(--button); font-size: 16px; line-height: 22px; transition: background-color 140ms ease; }
+.booking-summary__continue:hover { background: #151515; }
+.home-indicator { display: flex; align-items: center; justify-content: center; height: 24px; }
+.home-indicator__bar { display: block; width: 126px; height: 4px; border-radius: 2px; background: var(--ink); }
+@media (max-width: 360px) {
+  .booking__main { padding-inline: 20px; }
+  .time-choice__title { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .time-slot, .booking-summary__continue { transition: none; }
+}
+
+/* Интерактивные состояния и календарь практики №2. */
+.booking__main { display: flex; flex-direction: column; gap: 28px; padding-top: 28px; }
+.booking__footer { position: sticky; bottom: 0; box-shadow: 0 -1px 0 var(--line); }
+.booking-summary__time { font-size: 14px; line-height: 20px; min-height: 40px; }
+.booking-summary__continue:disabled { opacity: 0.4; cursor: not-allowed; }
+.booking-summary__continue:disabled:hover { background: var(--button); }
+.calendar { display: flex; flex-direction: column; gap: 12px; }
+.calendar__heading, .calendar__navigation { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.calendar__title { margin: 0; font-size: 22px; line-height: 30px; }
+.calendar__today { padding: 8px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 13px; }
+.calendar__today:hover { background: var(--neutral); color: var(--ink); }
+.calendar__month { margin: 0; text-align: center; font-size: 16px; font-weight: 600; }
+.calendar__arrow { display: flex; justify-content: center; align-items: center; width: 44px; height: 44px; flex: none; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font-size: 26px; }
+.calendar__arrow:hover { background: var(--neutral); }
+.calendar__weekdays, .calendar__days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.calendar__weekdays { text-align: center; color: var(--muted); font-size: 12px; }
+.calendar__day { min-width: 0; min-height: 40px; padding: 0; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--ink); font-size: 14px; }
+.calendar__day:enabled:hover { background: var(--neutral); border-color: var(--line); }
+.calendar__day--today { border-color: var(--line); }
+.calendar__day--selected { background: var(--button); color: var(--surface); }
+.calendar__day--selected:enabled:hover { background: #151515; color: var(--surface); }
+.calendar__day:disabled { opacity: 0.3; cursor: not-allowed; }
+.calendar__hint { margin: 0; font-size: 12px; line-height: 18px; color: var(--muted); }
+.time-slot { flex-direction: row; gap: 12px; }
+.time-slot--selected { background: var(--button); color: var(--surface); }
+.time-slot--selected:hover { background: #151515; }
+.time-slot__label { font-size: 12px; }
+.time-choice__empty { margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; line-height: 20px; color: var(--muted); }
+.booking-message { margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; line-height: 22px; background: var(--surface); }
+.no-script { padding: 24px; background: var(--surface); }
+[hidden] { display: none !important; }
+#root { width: min(100%, 390px); }
+.calendar:focus-visible { outline: 2px solid var(--muted); outline-offset: 6px; border-radius: 8px; }
+.request-status { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.request-status__text { margin: 0; font-size: 14px; line-height: 22px; color: var(--muted); }
+.request-status__retry { margin-top: 12px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: var(--neutral); }
+.request-status__retry:hover { background: #d2d2d2; }
